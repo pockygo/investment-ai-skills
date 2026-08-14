@@ -1,0 +1,4 @@
+interface:
+  display_name: "Brief Industry Research"
+  short_description: "Screen niche sectors with evidence and comparison tables"
+  default_prompt: "Use $brief-industry-research to assess this niche sector with current evidence, structured comparisons, a clear investment view, and next-step diligence actions."

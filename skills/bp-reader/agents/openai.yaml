@@ -1,0 +1,4 @@
+interface:
+  display_name: "BP Reader"
+  short_description: "Screen startup BPs for private-market investment decisions"
+  default_prompt: "请使用 $bp-reader 对这份商业计划书做一级市场快速初筛，输出一页纸投资摘要、关键风险、待核实问题和下一步建议。"

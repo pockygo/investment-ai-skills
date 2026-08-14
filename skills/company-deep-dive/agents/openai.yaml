@@ -1,0 +1,4 @@
+interface:
+  display_name: "Company Deep Dive"
+  short_description: "Analyze company alpha within a validated investment thesis"
+  default_prompt: "请使用 $company-deep-dive，结合 BP 初筛、行业 brief、深度行研和公司材料，判断这家公司是否是该方向里的优质投资标的。"
