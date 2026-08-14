@@ -1,0 +1,4 @@
+interface:
+  display_name: "投资建议书生成"
+  short_description: "依据Word模板和投决材料生成可编辑、可核验的投资建议书"
+  default_prompt: "Use $investment-recommendation-docx to convert a Word template and investment PPT/PDF into a fully editable investment recommendation document."

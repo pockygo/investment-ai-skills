@@ -1,0 +1,7 @@
+interface:
+  display_name: "基金季度报告"
+  short_description: "合并项目并更新投资概况、财务指标和目录"
+  default_prompt: "Use $fund-quarterly-report to update a quarterly fund operations report while preserving its Word formatting."
+
+policy:
+  allow_implicit_invocation: true

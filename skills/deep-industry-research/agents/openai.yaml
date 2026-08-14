@@ -1,0 +1,4 @@
+interface:
+  display_name: "Deep Industry Research"
+  short_description: "Build dense, comparison-rich sector investment roadmaps"
+  default_prompt: "Use $deep-industry-research to build a rigorous, slide-ready sector investment roadmap with web-verified evidence, analytical tables, target mapping, and editable report outputs."

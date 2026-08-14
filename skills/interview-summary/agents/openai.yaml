@@ -1,0 +1,4 @@
+interface:
+  display_name: "访谈纪要整理"
+  short_description: "将访谈逐字稿自动整理为结构化访谈纪要文档"
+  default_prompt: "Use $interview-summary to convert a verbatim interview transcript into a structured interview summary document."
