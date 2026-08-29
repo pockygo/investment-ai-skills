@@ -1,0 +1,4 @@
+interface:
+  display_name: "财务尽调审阅报告"
+  short_description: "从第三方财务尽调材料生成规范的内部财务审阅报告"
+  default_prompt: "Use $financial-dd-review-report to generate a Chinese internal financial due diligence review report from supplied third-party diligence materials."

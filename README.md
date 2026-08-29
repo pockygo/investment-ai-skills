@@ -17,6 +17,8 @@
 | `investment-recommendation-docx` | 按指定 Word 模板生成正式、可编辑的投资建议书 |
 | `xiangmu-biao` | 新建或更新投后项目表中的公司 Sheet 和季度经营数据 |
 | `fund-quarterly-report` | 根据项目及基金材料生成或更新基金季度报告 |
+| `financial-dd-review-report` | 将外部财务尽调材料转化为内部财务尽调审阅报告 DOCX |
+| `legal-dd-review-report` | 将外部法律尽调材料转化为内部法律尽调审阅报告 DOCX |
 
 ## 安装
 
