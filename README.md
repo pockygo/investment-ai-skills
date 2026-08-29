@@ -19,6 +19,7 @@
 | `fund-quarterly-report` | 根据项目及基金材料生成或更新基金季度报告 |
 | `financial-dd-review-report` | 将外部财务尽调材料转化为内部财务尽调审阅报告 DOCX |
 | `legal-dd-review-report` | 将外部法律尽调材料转化为内部法律尽调审阅报告 DOCX |
+| `ipo-research` | 招股书/问询函研究流水线，产出以利润拆解为主线的结构化研究报告（quick 初筛 / deep 深研双档位） |
 
 ## 安装
 
