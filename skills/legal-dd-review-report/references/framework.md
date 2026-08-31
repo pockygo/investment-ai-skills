@@ -14,7 +14,7 @@
 
 Keep this order and wording. Company-specific issue titles and update topics may change; the three top-level chapters may not.
 
-1. Cover: `[公司全称]`, `法务尽职调查审阅报告`, `[部门名称]`, `[YYYY年M月]`.
+1. Cover: `[公司全称]`, `法务尽职调查报告`, `[部门名称]`, `[YYYY年M月]`.
 2. 目录.
 3. `一、法务尽调背景情况`: paragraph 1 identifies the internal reviewer, target, cutoff, and scope; paragraph 2 identifies third-party counsel/report/date, review status, and supplemental period or missing supplemental material.
 4. `二、主要法律问题`: repeat `（一）[问题标题]` → `1、详细描述` → `根据《法律尽调报告》：` → facts/table → `2、风险分析` → internal analysis → `3、处理建议` → protections.

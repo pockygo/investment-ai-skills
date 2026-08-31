@@ -209,7 +209,7 @@ def cover(doc, data):
     p.paragraph_format.space_after = Pt(24)
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    r = p.add_run("法务尽职调查审阅报告")
+    r = p.add_run("法务尽职调查报告")
     set_run_font(r, size=18)
     for _ in range(7):
         doc.add_paragraph()
@@ -274,7 +274,7 @@ def build(data, template, out):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Build a legal DD review report from structured JSON.")
+    parser = argparse.ArgumentParser(description="Build a legal DD report from structured JSON.")
     parser.add_argument("input_json")
     parser.add_argument("--out", required=True)
     parser.add_argument("--template")

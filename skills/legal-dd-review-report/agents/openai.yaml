@@ -1,4 +1,4 @@
 interface:
-  display_name: "法律尽调审阅报告"
-  short_description: "从项目及第三方法律尽调材料生成内部法律尽调审阅报告"
-  default_prompt: "Use $legal-dd-review-report to review the supplied diligence materials and generate a legal due diligence review report in the retained framework."
+  display_name: "法律尽调报告"
+  short_description: "从项目及第三方法律尽调材料生成内部法律尽调报告"
+  default_prompt: "Use $legal-dd-review-report to review the supplied diligence materials and generate a legal due diligence report in the retained framework."

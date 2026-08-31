@@ -1,11 +1,11 @@
 ---
 name: legal-dd-review-report
-description: Generate a Chinese internal legal due diligence review report（法务尽职调查审阅报告/法律尽调审阅报告）from project initiation reports, third-party legal due diligence reports, supplemental diligence materials, transaction documents, and related project files. Use when Codex must review legal DD materials, identify and triage deal risks, draft internal legal conclusions and transaction protections, or produce a DOCX that strictly follows the retained three-chapter framework and visual style of the user's “5-法律尽调审阅报告”.
+description: Generate a Chinese internal legal due diligence report（法律尽职调查报告/法律尽调报告）from project initiation reports, third-party legal due diligence reports, supplemental diligence materials, transaction documents, and related project files. Use when Codex must review legal DD materials, identify and triage deal risks, draft internal legal conclusions and transaction protections, or produce a DOCX that strictly follows the retained three-chapter framework and visual style of the user's “5-法律尽调审阅报告”.
 ---
 
-# Legal DD Review Report
+# Legal DD Report
 
-Produce an internal review, not a shortened copy of counsel's report. Preserve the retained report's structure and distinguish source facts, third-party views, internal analysis, and supplemental updates.
+Produce an internal legal due diligence report, not a shortened copy of counsel's report. Preserve the retained report's structure and distinguish source facts, third-party views, internal analysis, and supplemental updates.
 
 ## Required resources
 
@@ -49,5 +49,5 @@ Use the bundled workspace Python runtime.
 
 ```powershell
 python scripts/extract_sources.py --out extracted.md input1.docx input2.pdf
-python scripts/build_report.py report.json --out 法律尽调审阅报告.docx
+python scripts/build_report.py report.json --out 法律尽调报告.docx
 ```

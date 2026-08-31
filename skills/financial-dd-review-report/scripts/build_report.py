@@ -239,7 +239,7 @@ def cover(doc, data):
     for _ in range(2):
         doc.add_paragraph()
     p = doc.add_paragraph()
-    r = p.add_run("财务尽职调查审阅报告")
+    r = p.add_run("财务尽职调查报告")
     set_font(r, size=18)
     for _ in range(8):
         doc.add_paragraph()
@@ -326,7 +326,7 @@ def build(data, template, out):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Build an internal financial DD review report")
+    parser = argparse.ArgumentParser(description="Build an internal financial DD report")
     parser.add_argument("input_json")
     parser.add_argument("--out", required=True)
     parser.add_argument("--template")
