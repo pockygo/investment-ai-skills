@@ -21,6 +21,7 @@
 | `legal-dd-review-report` | 将外部法律尽调材料转化为内部法律尽调报告 DOCX |
 | `ipo-research` | 招股书/问询函研究流水线，产出以利润拆解为主线的结构化研究报告（quick 初筛 / deep 深研双档位） |
 | `ipo-overview` | 将已完成 ipo-research 分析的项目摘录为一行记录，追加到项目总览表并渲染总览 HTML |
+| `listed-company-research` | 基于已上市公司连续多期年报/半年报/季报，形成商业模式、利润桥、现金流质量与管理层兑现度的可追溯研究报告（quick / deep 双档位） |
 
 ## 安装
 

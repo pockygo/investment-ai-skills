@@ -1,0 +1,4 @@
+interface:
+  display_name: "上市公司研究"
+  short_description: "基于多期定期报告追踪经营、利润质量与资本配置"
+  default_prompt: "Use $listed-company-research to analyze this listed company from its multi-period reports."
