@@ -115,3 +115,73 @@ total = sum(len(p.get_text()) for p in doc)   # ≈0 → 扫描件，渲染图�
 ```
 
 扫描件渲染：`page.get_pixmap(matrix=fitz.Matrix(3, 3))` 存 PNG，ReadMediaFile 阅读，关键区域用 region 裁切放大。
+
+## 7. 表尾追加区块（第八区「最新股权结构」专用）
+
+八区永远追加在七区之后，**这是唯一不需要 `fix_formulas` / `shift_down` 的操作**：上方单元格与公式引用完全不受影响（2026-09-22 实测，八区落地后 ①–⑦ 区与旧版逐格 diff = 0）。所以不要习惯性地先跑移位算法。
+
+```python
+from copy import copy
+from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+
+FONT_T = Font(name='微软雅黑', size=11, bold=True, color='FFFFFFFF')
+FONT_H = Font(name='微软雅黑', size=10, bold=True)
+FONT_B = Font(name='微软雅黑', size=10)
+FILL_T, FILL_H, FILL_TOT = '2F5597', 'D9E1F2', 'FCE4D6'
+side = Side(style='thin', color='999999')
+BD = Border(left=side, right=side, top=side, bottom=side)
+CTR = Alignment(horizontal='center', vertical='center', wrap_text=True)
+LFT = Alignment(horizontal='left', vertical='center', wrap_text=True)
+
+def append_equity_block(ws, rows, title='八、最新股权结构',
+                        header=('股东（发起人）', '持股比例', '认缴出资额（万元）'),
+                        note=None, height=32.0):
+    """rows: [(股东, 比例float, 金额float)]，已按比例降序。返回 (标题行, 合计行)。"""
+    start = ws.max_row + 2                     # 末行后空 1 行
+    ws.merge_cells(start_row=start, start_column=1, end_row=start, end_column=12)
+    c = ws.cell(start, 1, title); c.font = FONT_T
+    c.fill = PatternFill('solid', fgColor=FILL_T)
+    c.alignment = Alignment(horizontal='left', vertical='center')
+    ws.row_dimensions[start].height = 20
+    r = start + 1
+    for i, h in enumerate(header, 1):          # 表头：单行，不跨行合并
+        cell = ws.cell(r, i, h); cell.font = FONT_H
+        cell.fill = PatternFill('solid', fgColor=FILL_H)
+        cell.alignment = CTR; cell.border = BD
+    ws.row_dimensions[r].height = 30
+    if note:                                   # 注释行：9 号灰字，说明来源/基准日/口径
+        r += 1
+        nc = ws.cell(r, 1, note)
+        nc.font = Font(name='微软雅黑', size=9, color='808080')
+        ws.row_dimensions[r].height = 22
+    first = r + 1
+    for name, pct, amt in rows:
+        r += 1
+        for col, val, f, al in ((1, name, 'General', LFT),
+                                (2, pct, '0.0000%', CTR),
+                                (3, amt, '#,##0.00', CTR)):
+            cell = ws.cell(r, col, val)
+            cell.font = FONT_B; cell.border = BD
+            cell.alignment = al; cell.number_format = f
+        ws.row_dimensions[r].height = height   # A 列 wrap 需要行高
+    r += 1                                     # 合计行：SUM 公式 + 橙底，禁止写死数值
+    ws.cell(r, 1, '合计')
+    ws.cell(r, 2, f'=SUM(B{first}:B{r-1})')
+    ws.cell(r, 3, f'=SUM(C{first}:C{r-1})')
+    for col in range(1, 4):
+        cell = ws.cell(r, col)
+        cell.font = Font(name='微软雅黑', size=10, bold=True)
+        cell.fill = PatternFill('solid', fgColor=FILL_TOT)
+        cell.border = BD
+        cell.number_format = '0.0000%' if col == 2 else ('#,##0.00' if col == 3 else 'General')
+    # 合计行样式收尾：A/B/C 之外的列补边框可不做，八区只用 A:C
+    return start, r
+```
+
+追加后必查：
+
+1. `ΣC == 一区「注册资本（万元）」C16`、`ΣB == 100%`（容差 1e-5）；
+2. 我方基金/其 SPV 行与②区「当前持股比例」能对上（差异必须在注释里写明穿透关系）;
+3. 八区内部增删股东行时，只有本区行号变动——但 `=SUM(B首:B末)` 区间必须同步（`fix_formulas(ws, R)` 会连带修正区间，可复用）；
+4. 若是给**尚无八区**的 sheet 追加，末行可能是注释行或七区 XIRR 行——一律 `start = ws.max_row + 2`，不要覆盖末行。
+
