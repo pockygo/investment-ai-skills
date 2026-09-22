@@ -79,10 +79,11 @@ def scan_block8(ws, wsf=None):
 
     for r in range(b8 + 1, ws.max_row + 1):
         a, bb, c = ws.cell(r, 1).value, ws.cell(r, 2).value, ws.cell(r, 3).value
-        if a is None and bb is None and c is None:
-            continue
         fb = wsf.cell(r, 2).value if wsf is not None else None
         fc = wsf.cell(r, 3).value if wsf is not None else None
+        # 空行判定同时看公式列：openpyxl 重存后缓存值会丢，无 A 列标签的 =SUM 合计行只能靠公式识别
+        if a is None and bb is None and c is None and fb is None and fc is None:
+            continue
         if (isinstance(a, str) and TOTAL_RE.match(a)) or is_sum(fb) or is_sum(fc):
             info['total_row'] = r
             info['sum_b'], info['sum_c'] = bb, c

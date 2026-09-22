@@ -178,12 +178,14 @@ def scan_block8(ws, b8, wsf=None):
 
     for r in range(b8 + 1, ws.max_row + 1):
         a, b, c = ws.cell(r, 1).value, ws.cell(r, 2).value, ws.cell(r, 3).value
-        if a is None and b is None and c is None:
-            continue
         if wsf is not None:
             fb, fc = wsf.cell(r, 2).value, wsf.cell(r, 3).value
         else:
             fb = fc = None
+        # 空行判定要同时看公式列：openpyxl 重存后公式缓存值会丢，data_only 读出 None，
+        # 但公式仍在（无 A 列标签的 =SUM 合计行只能靠这个识别）
+        if a is None and b is None and c is None and fb is None and fc is None:
+            continue
         if (isinstance(a, str) and TOTAL_RE.match(a)) or is_sum_cell(fb) or is_sum_cell(fc):
             info['total_row'] = r
             info['sum_b'], info['sum_c'] = b, c
