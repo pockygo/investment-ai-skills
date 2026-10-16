@@ -1,6 +1,6 @@
 # 一级市场投资 AI Skills
 
-一套面向一级市场投资团队的 Codex Skills，覆盖 BP 初筛、行业研究、公司分析、访谈纪要、投决材料、投资建议书、投后台账和基金季度报告。
+一套面向一级市场投资团队的 Codex Skills，覆盖 BP 初筛、行业研究、公司分析、访谈纪要、投决材料、投资建议书、投后台账、基金季度报告和财报取数制表。
 
 配套工作流指南：[一级市场投资 AI 工作流指南](https://investment-ai-workflow-cn.waymewym.chatgpt.site)
 
@@ -22,6 +22,7 @@
 | `ipo-research` | 招股书/问询函研究流水线，产出以利润拆解为主线的结构化研究报告（quick 初筛 / deep 深研双档位） |
 | `ipo-overview` | 将已完成 ipo-research 分析的项目摘录为一行记录，追加到项目总览表并渲染总览 HTML |
 | `listed-company-research` | 基于已上市公司连续多期年报/半年报/季报，形成商业模式、利润桥、现金流质量与管理层兑现度的可追溯研究报告（quick / deep 双档位） |
+| `financial-report-to-excel` | 从上市公司连续年报/半年报/季报提取财务指标、地域收入、终端市场和业务分部数据，按指定 Excel 模板生成可追溯的历史报表 |
 
 ## 安装
 
