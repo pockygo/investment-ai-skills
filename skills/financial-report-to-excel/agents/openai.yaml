@@ -1,0 +1,4 @@
+interface:
+  display_name: "上市公司财报取数制表"
+  short_description: "从上市公司连续财报提取财务及分类收入，按用户模板生成可追溯的 Excel"
+  default_prompt: "使用 $financial-report-to-excel，根据文件夹中的上市公司财报，按我指定的模板提取财务、地域、终端市场及业务分部数据，生成每年五行的 Excel。"
