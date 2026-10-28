@@ -29,6 +29,12 @@ Keep this shorter than deep research. Build enough analytical density for a part
 
 ## Workflow
 
+Execute the brief as a three-phase rhythm — breadth first, then depth, then forced output. Do not mix phases:
+
+1. **Outline (breadth, no depth)**: read one or two industry reports and one leader's financials or prospectus; sketch the value-chain structure map. The goal is a complete outline, not detail.
+2. **Fill (compare the money flow)**: break down each value-chain link, compare 3–5 companies' business models, and work out how money and profit actually flow through the chain.
+3. **Output (stop input)**: stop collecting; write the drivers, key variables, and your judgment. A written conclusion — even one page — is the completion criterion; analysis that never converges to a written judgment counts as information sorting, not research.
+
 ### 1. Define the niche
 
 - Extract the trigger company, product, customer, use case, geography, business model, financing stage, and claimed advantage.

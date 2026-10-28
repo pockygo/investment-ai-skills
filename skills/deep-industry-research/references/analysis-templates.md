@@ -46,6 +46,8 @@ Use the stages: lab, prototype, pilot, customer validation, design-in, design-wi
 
 Do not infer industry stage from CR5 alone. Combine demand validation, standards, qualification, production scale, cost curve, supply-chain lock-in, and concentration.
 
+For each core driver (technology, policy, demand), apply the driver-disappearance test: if that driver vanished, would the industry still exist? Record the result in the table's `Trigger event` or `Verification signal` column — a sector that fails the test carries structural demand risk regardless of current growth.
+
 ## 4. Demand Reality
 
 **Decision question:** Who pays, why now, and what evidence proves repeatable demand?

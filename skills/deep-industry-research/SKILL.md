@@ -54,6 +54,12 @@ Build a source inventory when multiple materials are provided.
 - State the trigger company or prior decision when applicable.
 - Define what is excluded and identify adjacent substitutes.
 - Set the report title and `sector_slug`.
+- Before researching, run the four-question self-test to expose structural gaps early:
+  1. What problem does this industry actually solve (not what it superficially sells)?
+  2. In which value-chain link is the money actually made?
+  3. Why do some companies survive and others disappear?
+  4. What is the biggest variable in the next three years?
+  Answer each in one sentence where possible; mark unanswered ones as explicit research objectives rather than leaving them implicit.
 
 ### 2. Build the source and evidence map
 
@@ -68,7 +74,7 @@ Build a source inventory when multiple materials are provided.
 Build the analytical core in this order:
 
 1. **Product and technology routes**: customer problem, route mechanics, selection metrics, substitutes, maturity, and commercialization bottlenecks.
-2. **Industry stage and inflection points**: technology, demand, policy, supply-chain, cost, and capital-market catalysts; adoption triggers and invalidation signals.
+2. **Industry stage and inflection points**: technology, demand, policy, supply-chain, cost, and capital-market catalysts; adoption triggers and invalidation signals. Identify the industry's core drivers (typically technology, policy, demand) and apply the driver-disappearance test to each: if this driver vanished, would the industry still exist? Use it to separate structurally sound sectors from subsidy- or policy-manufactured demand.
 3. **Value chain, cost, and profit pool**: upstream/downstream structure, cost breakdown, bottlenecks, pricing power, margins, capex, working capital, and structurally weak layers.
 4. **Market size and growth**: TAM/SAM/SOM, bottom-up sanity checks, scenarios, timing, unit economics, and source disagreements.
 5. **Competition and startup window**: global and China leaders, startup archetypes, qualification barriers, consolidation, route substitution, and where new entrants can still win.
@@ -172,6 +178,7 @@ For tables:
 
 Before delivery, verify:
 
+- the report opens with a forced 1–2 sentence core conclusion — what kind of industry this is, whether it is worth entering, and why; analysis that never converges to a written judgment counts as information sorting, not research;
 - the five-step industry spine is complete or explicitly marked as not applicable;
 - every core section satisfies the content depth contract;
 - market figures have units, periods, formulas, and scenarios;
