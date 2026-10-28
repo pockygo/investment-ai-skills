@@ -160,7 +160,7 @@ Build each core page or section around:
 - Use concrete mechanisms, metrics, milestones, and evidence; avoid matrices made only of `高/中/低`.
 - Add a conclusion below every decisive table.
 - Cite sources in cells, captions, or adjacent notes.
-- Split a table when it will become illegible in Word or PDF.
+- Split a table when it will become illegible in the rendered HTML.
 - Use prose when nuance matters more than alignment.
 
 ### Density rules

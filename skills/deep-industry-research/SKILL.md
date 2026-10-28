@@ -1,6 +1,6 @@
 ---
 name: deep-industry-research
-description: Build rigorous, comparison-rich private-market industry investment roadmaps from a prior sector brief, BP, company clue, sector name, or local research materials. Use when Codex must deeply analyze technology routes, adoption timing, value chains, profit pools, market scenarios, competition, investable segments, target companies, risks, and exits, then deliver a slide-ready report with web-verified evidence, analytical tables, visuals, Markdown, Word, and PDF.
+description: Build rigorous, comparison-rich private-market industry investment roadmaps from a prior sector brief, BP, company clue, sector name, or local research materials. Use when Codex must deeply analyze technology routes, adoption timing, value chains, profit pools, market scenarios, competition, investable segments, target companies, risks, and exits, then deliver a slide-ready report with web-verified evidence, analytical tables, visuals, Markdown, and HTML (Word and PDF only on request).
 ---
 
 # Deep Industry Research
@@ -28,8 +28,10 @@ Do not produce a generic overview or a collection of thin one-paragraph sections
 - Read both references before drafting:
   - [references/report-structure.md](references/report-structure.md)
   - [references/analysis-templates.md](references/analysis-templates.md)
-- Save final deliverables in the active workspace's `outputs/` directory unless the user specifies another writable location:
+- Save final deliverables in the active workspace's `outputs/` directory unless the user specifies another writable location. Default outputs:
   - `{{sector_slug}}-deep-industry-research.md`
+  - `{{sector_slug}}-deep-industry-research.html`
+- Only when the user explicitly asks, also generate:
   - `{{sector_slug}}-deep-industry-research.docx`
   - `{{sector_slug}}-deep-industry-research.pdf`
 - Keep intermediate figures and source assets in `outputs/{{sector_slug}}-assets/`.
@@ -107,10 +109,10 @@ Do not postpone all company relevance to the final chapter. Add concise company 
 ### 7. Generate and verify deliverables
 
 - Produce polished Markdown first.
-- Generate editable Word and polished PDF versions.
-- Use real headings, editable tables, source notes, captions, page numbers, and a table of contents.
-- Render and visually inspect the PDF. Check clipped text, table width, image resolution, captions, citations, and page balance.
-- Inspect or render the Word file when possible.
+- Generate a polished, self-contained HTML version (inline CSS, embedded images) for direct browser reading and sharing.
+- Use real headings, tables, source notes, captions, and a table of contents; keep the HTML readable on screen and in print view.
+- Render and visually inspect the HTML (browser or screenshot). Check clipped text, table width, image resolution, captions, and citations.
+- Generate Word and PDF versions only when the user explicitly asks; apply the same render-and-inspect check to each when produced.
 - If a required renderer is unavailable, still deliver the remaining formats and explain the limitation.
 
 ## Content Depth Contract
@@ -164,7 +166,7 @@ For tables:
 - use specific mechanisms, numbers, or evidence rather than only `高/中/低`;
 - include sources in cells, captions, or adjacent notes;
 - write a short conclusion below the table;
-- keep tables readable in Word and PDF; split oversized matrices instead of shrinking them into illegibility.
+- keep tables readable in the rendered HTML; split oversized matrices instead of shrinking them into illegibility.
 
 ## Visual Discipline
 
@@ -189,7 +191,7 @@ Before delivery, verify:
 - the strongest bear case is developed fairly;
 - target-company implications are evidence-based;
 - the report states invalidation signals and next tracking actions;
-- Markdown, Word, and PDF are internally consistent and visually usable.
+- Markdown and HTML are internally consistent and visually usable (Word/PDF too when the user requested them).
 
 ## Tone
 
