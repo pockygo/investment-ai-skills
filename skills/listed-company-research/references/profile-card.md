@@ -19,6 +19,18 @@
 - 缺失单元格写"未披露"，禁止留空或编造
 - 口径重述的年份：以最新披露口径为主序列，同时在表下注出原值/重述值/差额
 
+### 生成方式
+
+```bash
+python3 scripts/annual_series.py --out timeseries/财务时间序列.md
+```
+
+- 主数据来自 `extracts/fin_all.csv`（`parse_tables.py` 产出）。
+- **公司特有信息**单独入 CSV，不要把某家公司的数字写进脚本：
+  - `extracts/dividends.csv`：`year,dps_per_10,shares,note,source`（每 10 股派息 × 分配基数 = 现金分红）
+  - `extracts/segments.csv`：`period,product,revenue_m,share_pct,yoy_pct,gm_pct,note`（口径变更时用 `note` 标出阶段）
+- 缺文件时对应列写"未披露"，不阻断生成；抄录值必须留页码来源。
+
 ## 产物二：`report/<公司简称>_档案卡.md`
 
 一页式固定 schema 卡片，严格按以下结构（标题与字段名不可改）：
@@ -68,3 +80,5 @@
 
 - 该表是 timeseries 表 A 的子集，数值必须一致，直接取子集不重新计算
 - 最新一期为半年报/季报时，同比与上年同期比，并在表下注明口径
+- 本节为**年度口径**；季度口径（单季、同比/环比、TTM、营运资金）见
+  [季度面板规范](quarterly-panel.md) 的 `timeseries/季度财务面板.md`，两者不可混排
