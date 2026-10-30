@@ -5,7 +5,7 @@
 1. 季报有两套列：「本报告期」（单季）与「年初至报告期末」（累计）。取错就会把单季
    当累计相减，算出负数季度。本脚本取累计列，并用年报「分季度主要财务指标」表校验。
 2. 单季 = 累计差额：Q1=c1，Q2=c2-c1，Q3=c3-c2，Q4=c4-c3。
-3. 环比受季节性影响（Q1 通常最低），因此同比、环比、TTM 并列，趋势以 TTM 为主。
+3. 环比受公司特定季节性影响，因此同比、环比、TTM 并列，趋势以 TTM 为主。
 
 用法:
     python3 scripts/quarterly.py --extracts extracts --out timeseries/季度财务面板.md
@@ -193,16 +193,26 @@ def validate(quarters, qdis):
             continue
         year = int(m.group(1))
         seq = [(n, v) for n, v in rows if not any(k in n for k in KPI_SKIP)]
-        disclosed = [v for _, vals in seq[:1] for v in vals if v is not None]
-        if len(disclosed) < 4:
-            continue
-        for qi, dv in enumerate(disclosed[:4], 1):
-            q = quarters.get((year, qi))
-            if not q or q.get("rev") is None:
+        for name, vals in seq:
+            if "营业收入" in name:
+                field = "rev"
+            elif "非经常性损益" in name and "净利润" in name:
+                field = "ded"
+            elif "净利润" in name and ("归属" in name or "归母" in name):
+                field = "net"
+            elif "经营活动" in name:
+                field = "ocf"
+            else:
                 continue
-            checked += 1
-            if abs(q["rev"] - dv) > max(1e5, abs(dv) * 0.005):
-                issues.append((year, qi, q["rev"], dv))
+            for qi, dv in enumerate(vals[:4], 1):
+                q = quarters.get((year, qi))
+                if dv is None or q is None or q.get(field) is None:
+                    continue
+                checked += 1
+                # Flag when either materiality threshold is exceeded.
+                threshold = min(1e5, abs(dv) * 0.005) if dv else 1e5
+                if abs(q[field] - dv) > threshold:
+                    issues.append((year, qi, field, q[field], dv))
     return checked, issues
 
 
@@ -216,6 +226,25 @@ def pct(v):
 
 def ratio(v):
     return "未披露" if v is None else f"{v:.2f}"
+
+
+def previous_quarter(key, n=1):
+    serial = key[0] * 4 + key[1] - 1 - n
+    return serial // 4, serial % 4 + 1
+
+
+def ttm_values(quarters, key):
+    """Calendar-contiguous window; missing fields remain missing, never zero."""
+    win = [quarters.get(previous_quarter(key, n)) for n in range(4)]
+    if any(w is None for w in win):
+        return None
+    def total(field):
+        vals = [w.get(field) for w in win]
+        return None if any(v is None for v in vals) else sum(vals)
+    rev, net, cost, ocf = (total(f) for f in ("rev", "net", "cost", "ocf"))
+    return {"rev": rev, "net": net,
+            "gm": 1 - cost / rev if rev and cost is not None else None,
+            "ncr": ocf / net if net and ocf is not None else None}
 
 
 def main():
@@ -242,31 +271,22 @@ def main():
         return None if (not a or b is None) else b / a - 1
 
     def qoq(i, f):
-        if i == 0:
+        prev = quarters.get(previous_quarter(keys[i]))
+        if prev is None:
             return None
-        a, b = q_at(i - 1).get(f), q_at(i).get(f)
-        return None if (not a or b is None) else b / a - 1
+        a, b = prev.get(f), q_at(i).get(f)
+        return None if not a or b is None else b / a - 1
 
     def ttm(i):
-        if i < 3:
-            return None
-        win = [q_at(j) for j in range(i - 3, i + 1)]
-        if any(w is None for w in win):
-            return None
-        rev = sum(w.get("rev") or 0 for w in win)
-        net = sum(w.get("net") or 0 for w in win)
-        cost = sum(w.get("cost") or 0 for w in win)
-        ocf = sum(w.get("ocf") or 0 for w in win)
-        gm = (1 - cost / rev) if (rev and cost) else None
-        return {"rev": rev, "net": net, "gm": gm,
-                "ncr": (ocf / net) if net else None}
+        return ttm_values(quarters, keys[i]) if 0 <= i < len(keys) else None
 
     checked, issues = validate(quarters, qdis)
+    status = "未取得独立对照，不代表核验通过" if checked == 0 else f"独立对照 {checked} 格，差异 {len(issues)} 格"
     L = ["# 季度财务面板", "",
          f"> 覆盖 {keys[0][0]}Q{keys[0][1]}–{keys[-1][0]}Q{keys[-1][1]}，共 {len(keys)} 个季度；"
          "金额单位：百万元。",
          "> 口径：单季 = 累计数差额（季报取「年初至报告期末」列）；季报与半年报未经审计。"
-         f"与年报「分季度主要财务指标」交叉校验 {checked} 格，不一致 {len(issues)} 格。", ""]
+         f"{status}。源表语义、重述与单位仍须原文核验。", ""]
 
     L += ["## 表 A 单季规模与盈利", "",
           "| 季度 | 营业收入 | YoY | QoQ | 归母净利 | YoY | QoQ | 扣非净利 |",
@@ -283,7 +303,7 @@ def main():
     for k in keys:
         q = quarters[k]
         rev, cost, net = q.get("rev"), q.get("cost"), q.get("net")
-        gm = (1 - cost / rev) if (rev and cost) else None
+        gm = (1 - cost / rev) if (rev and cost is not None) else None
         nm = (net / rev) if (rev and net is not None) else None
         dr = (q["ded"] / net) if (q.get("ded") is not None and net) else None
         ncr = (q["ocf"] / net) if (q.get("ocf") is not None and net) else None
@@ -301,9 +321,9 @@ def main():
         if not t:
             L.append(f"| {k[0]}Q{k[1]} | — | — | — | — | — | — |")
             continue
-        p = ttm(i - 4) if i >= 4 else None
-        ry = (t["rev"] / p["rev"] - 1) if (p and p.get("rev")) else None
-        ny = (t["net"] / p["net"] - 1) if (p and p.get("net")) else None
+        p = ttm_values(quarters, previous_quarter(k, 4))
+        ry = (t["rev"] / p["rev"] - 1) if (p and p.get("rev") and t["rev"] is not None) else None
+        ny = (t["net"] / p["net"] - 1) if (p and p.get("net") and t["net"] is not None) else None
         L.append(f"| {k[0]}Q{k[1]} | {fmt(t['rev'])} | "
                  f"{pct(ry) if ry is not None else '—'} | {fmt(t['net'])} | "
                  f"{pct(ny) if ny is not None else '—'} | "
@@ -335,14 +355,16 @@ def main():
                  f"{f'{invd:.0f}' if invd is not None else '未披露'} | {fmt(q.get('debt'))} |")
 
     if issues:
-        L += ["", "## 校验不一致项", "", "| 年度 | 季度 | 相减值 | 披露值 |", "|---|---|---|---|"]
-        for y, qi, a, b in issues[:20]:
-            L.append(f"| {y} | Q{qi} | {a/1e6:,.1f} | {b/1e6:,.1f} |")
+        L += ["", "## 校验不一致项", "", "| 年度 | 季度 | 指标 | 相减值 | 披露值 |", "|---|---|---|---|---|"]
+        for y, qi, field, a, b in issues:
+            L.append(f"| {y} | Q{qi} | {field} | {a/1e6:,.1f} | {b/1e6:,.1f} |")
 
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text("\n".join(L) + "\n", encoding="utf-8")
-    print(f"OK -> {out}（{len(keys)} 个季度；校验 {checked} 格，不一致 {len(issues)} 格）")
+    print(f"已生成 -> {out}（{len(keys)} 个季度；{status}）")
+    if issues:
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":
