@@ -1,0 +1,4 @@
+interface:
+  display_name: "上市公司年报下载与归档"
+  short_description: "跨市场查找、下载和校验上市公司定期报告，整理来源记录与可追溯Excel台账"
+  default_prompt: "使用 $listed-company-filings 下载指定上市公司的历年年报和半年报，核对报告期并更新归档台账。"
