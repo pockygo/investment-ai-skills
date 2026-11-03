@@ -1,6 +1,6 @@
 # 一级市场投资 AI Skills
 
-一套面向一级市场投资团队的 Codex Skills，覆盖 BP 初筛、行业研究、公司分析、访谈纪要、投决材料、投资建议书、投后台账、基金季度报告和财报取数制表。
+一套面向一级市场投资团队的 Codex Skills，覆盖 BP 初筛、行业研究、公司分析、访谈纪要、投决材料、投资建议书、投后台账、基金季度报告、财报取数制表和研究掌握度访谈。
 
 配套工作流指南：[一级市场投资 AI 工作流指南](https://investment-ai-workflow-cn.waymewym.chatgpt.site)
 
@@ -13,6 +13,7 @@
 | `deep-industry-research` | 建立行业投资地图、技术路线、市场情景和标的清单 |
 | `company-deep-dive` | 深度分析目标公司的团队、产品、客户、财务和投资价值 |
 | `interview-summary` | 将中文访谈逐字稿整理为结构化访谈纪要 DOCX |
+| `research-mastery-interview` | 用一对一追问式访谈检验是否真正学懂一份研究材料，产出可复用的掌握度诊断 |
 | `toujue-baogao` | 根据真实项目材料编制或更新中文投决报告和投委会材料 |
 | `investment-recommendation-docx` | 按指定 Word 模板生成正式、可编辑的投资建议书 |
 | `xiangmu-biao` | 新建或更新投后项目表中的公司 Sheet 和季度经营数据 |
@@ -21,7 +22,8 @@
 | `legal-dd-review-report` | 将外部法律尽调材料转化为内部法律尽调报告 DOCX |
 | `ipo-research` | 招股书/问询函研究流水线，产出以利润拆解为主线的结构化研究报告（quick 初筛 / deep 深研双档位） |
 | `ipo-overview` | 将已完成 ipo-research 分析的项目摘录为一行记录，追加到项目总览表并渲染总览 HTML |
-| `listed-company-research` | 基于已上市公司连续多期年报/半年报/季报，形成商业模式、利润桥、现金流质量与管理层兑现度的可追溯研究报告（quick / deep 双档位）；含季度财务面板与 2×2 经营面板图 |
+| `listed-company-research` | 基于已上市公司连续多期年报/半年报/季报，形成商业模式、利润桥、现金流质量与管理层兑现度的可追溯研究报告（quick / deep / update 三档位）；update 档只增量更新档案卡与 HTML；含季度财务面板与 2×2 经营面板图 |
+| `listed-company-excel` | 从档案卡、分析 HTML/Markdown、季度财务面板生成单季营收同比矩阵、单季盈利质量块和 2×2 季度面板图墙 |
 | `financial-report-to-excel` | 从上市公司连续年报/半年报/季报提取财务指标、地域收入、终端市场和业务分部数据，按指定 Excel 模板生成可追溯的历史报表 |
 
 ## 安装

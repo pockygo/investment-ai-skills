@@ -1,0 +1,4 @@
+interface:
+  display_name: "上市公司财务 Excel"
+  short_description: "从档案卡/HTML 生成单季营收同比矩阵、单季盈利质量表与 2×2 季度面板图墙"
+  default_prompt: "Use $listed-company-excel to build a single-quarter revenue YoY matrix, a single-quarter profit-quality table, or a 2x2 quarterly chart wall from existing profile cards and research HTML."

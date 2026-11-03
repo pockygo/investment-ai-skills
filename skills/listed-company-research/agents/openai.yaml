@@ -1,4 +1,4 @@
 interface:
   display_name: "上市公司研究"
-  short_description: "基于多期定期报告追踪经营、利润质量与资本配置"
-  default_prompt: "Use $listed-company-research to analyze this listed company from its multi-period reports."
+  short_description: "基于多期定期报告研究上市公司；已完成项目可用 update 档增量更新档案卡与 HTML"
+  default_prompt: "Use $listed-company-research to analyze this listed company from its multi-period reports. For an existing project with a new filing, use update mode and refresh only the profile card and HTML."

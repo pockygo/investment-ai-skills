@@ -1,0 +1,4 @@
+interface:
+  display_name: "研究掌握度访谈"
+  short_description: "用一对一追问式访谈检验是否真正学懂一份研究材料"
+  default_prompt: "请使用 $research-mastery-interview，基于这份研究材料对我做一次掌握度访谈：一次只问一题，顺着我的回答追问，最后给出诊断和补强建议。"
